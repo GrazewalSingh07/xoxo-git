@@ -16,7 +16,7 @@ export default function Flipbook({show}) {
   const scrollContainer = useRef();
   const flipbookContainer = useRef();
   const lastScrollTime = useRef(0);
-
+  const debouncedIndex = useRef(imageIndex);
   useEffect(() => {
     let ctx = gsap.context(() => {
       gsap.to({}, {
@@ -27,11 +27,20 @@ export default function Flipbook({show}) {
           scrub: 1,
           onUpdate: (self) => {
             const now = Date.now();
-            if (now - lastScrollTime.current > 100) {  
-              lastScrollTime.current = now;
-              const index = Math.floor(self.progress * (images.length - 1));
-              setImageIndex(index);
-            }
+            if (now - lastScrollTime.current > 50) { // Increase time gap to smooth out fast scrolling
+                lastScrollTime.current = now;
+  
+                // Calculate the index based on the scroll progress
+                const newIndex = Math.floor(self.progress * (images.length - 1));
+  
+                // Debounce the update, so we don't update the state too often
+                if (newIndex !== debouncedIndex.current) {
+                  debouncedIndex.current = newIndex;
+                  setImageIndex(newIndex);
+
+                  console.log(newIndex)
+                }
+              }
           },
         },
       });

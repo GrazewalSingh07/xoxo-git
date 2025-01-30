@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
  
 import ParallexEffect from './ParallexEffect';
+import FlipbookAnimation from './Effect2';
 
  
  
@@ -37,7 +38,8 @@ export const BeeSection = () => {
         </div>
      
          
-         <ParallexEffect show={showParallex}/>
+         {/* <ParallexEffect show={showParallex}/> */}
+         <FlipbookAnimation  />
         
          
       </div>

@@ -14,7 +14,7 @@ const navButtons=[
 ]
 const Navbar = ({showNavbar}) => {
   const navbarRef = useRef(null);
-  const [handleSelected]=useContext(NavContext)
+  const [selected,handleSelected]=useContext(NavContext)
    
   useEffect(() => {
     const navbar = navbarRef.current;
