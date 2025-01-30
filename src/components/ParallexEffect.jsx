@@ -15,6 +15,7 @@ export default function Flipbook({show}) {
 
   const scrollContainer = useRef();
   const flipbookContainer = useRef();
+  const lastScrollTime = useRef(0);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -25,8 +26,12 @@ export default function Flipbook({show}) {
           end: "bottom bottom",
           scrub: 1,
           onUpdate: (self) => {
-            const index = Math.floor(self.progress * (images.length - 1));
-            setImageIndex(index);
+            const now = Date.now();
+            if (now - lastScrollTime.current > 100) { // Limit state updates (100ms)
+              lastScrollTime.current = now;
+              const index = Math.floor(self.progress * (images.length - 1));
+              setImageIndex(index);
+            }
           },
         },
       });
@@ -48,7 +53,7 @@ export default function Flipbook({show}) {
 
 
   return (
-    <div className="frame-scroller parallexContainer " ref={scrollContainer} style={{ position: "relative", height: "2733px" }}>
+    <div className="frame-scroller parallexContainer " ref={scrollContainer} style={{ position: "relative", height: "2733px",overflow:'auto' }}>
       {/* Inner container for viewport control */}
       <div style={{ height: "911px" }}>
         <div className="position-relative" style={{ height: "911px" }}>
