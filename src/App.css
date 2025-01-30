@@ -2,6 +2,7 @@
   display: none;
   visibility: hidden;
   overflow: hidden;
+  
  }
  ::-webkit-scrollbar-track{
   display: none;
@@ -12,8 +13,7 @@
  body,html{
     padding: 0;
     margin: 0; 
-   box-sizing: border-box;
-  
+    box-sizing: border-box;
     
  
  } 
@@ -22,11 +22,7 @@
   border:2px solid black; 
 
  }
-
- canvas{
-    width: 100vw;
-    height: 100vh;
- }
+ 
  
  
 .header{

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './Navbar';
-import DownwardArrow from './DownwardsArrow';
+ 
 import {  BeeSection } from './Bee';
 import { NavContext } from '../context/navContext';
 
@@ -92,7 +92,11 @@ const Header = () => {
   
    
   return (
-    <div>
+    <div style={{
+      position: 'sticky',
+      top: 0,
+   
+    }}>
       <div
         ref={headerRef}
         className={`${!logoGone && 'header'}`}

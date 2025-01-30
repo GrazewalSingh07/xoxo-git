@@ -13,9 +13,8 @@ export const Button = ({ button, index ,handleClick}) => {
 
     let interval;
     if (isHovering && selected!=button.label) {
-      // Start toggling the border color on hover
-      interval = setInterval(() => {
-        // const currentColor = element.style.borderColor;
+      
+      interval = setInterval(() => { 
         const currentColor = window.getComputedStyle(element).borderColor; 
 element.style.borderColor = currentColor === 'rgb(255, 49, 49)' ? 'black' : '#ff3131';
 
@@ -24,28 +23,24 @@ element.style.borderColor = currentColor === 'rgb(255, 49, 49)' ? 'black' : '#ff
     } else if(selected==button.label){
       clearInterval(interval);
       element.style.borderColor = '#ff3131';
-    } else {
-      // Clear the interval when not hovering
+    } else { 
       clearInterval(interval);
-      element.style.borderColor = 'black'; // Set the border color to black immediately
+      element.style.borderColor = 'black'; 
     }
-    if (isHovering || selected === button.label) {
-      // On hover or if the button is selected, scale the child element
+    if (isHovering || selected === button.label) { 
       gsap.to(child.current, {
         scale: selected === button.label ? 1.2 : 1.2,
         ease: 'elastic.inOut',
         duration: 0.5,
       });
-    } else {
-      // On hover out, reset the scale unless selected
+    } else { 
       gsap.to(child.current, {
         scale: 1,
         ease: 'elastic.inOut',
         duration: 0.5,
       });
     }
-   
-    // Cleanup interval when the component unmounts
+    
     return () => clearInterval(interval);
 
    

@@ -9,7 +9,7 @@ export default function Flipbook({show}) {
 //   const totalImages = 264; // Since you have 263 images, but we start from 0
 //   const images = Array.from({ length: totalImages }, (_, i) => `/bee/Danny.${String(i).padStart(4, '0')}.jpg`);
  
-  const imageNumbers = Array.from({ length: 167 }, (_, i) => 114 + i); // Image sequence 246 - 268
+  const imageNumbers = Array.from({ length: 167 }, (_, i) => 114 + i);  
   const images = imageNumbers.map(num => `/bee/Danny.0${num}.jpg`);
 
 
@@ -27,7 +27,7 @@ export default function Flipbook({show}) {
           scrub: 1,
           onUpdate: (self) => {
             const now = Date.now();
-            if (now - lastScrollTime.current > 100) { // Limit state updates (100ms)
+            if (now - lastScrollTime.current > 100) {  
               lastScrollTime.current = now;
               const index = Math.floor(self.progress * (images.length - 1));
               setImageIndex(index);
@@ -54,7 +54,7 @@ export default function Flipbook({show}) {
 
   return (
     <div className="frame-scroller parallexContainer " ref={scrollContainer} style={{ position: "relative", height: "2733px",overflow:'auto' }}>
-      {/* Inner container for viewport control */}
+      
       <div style={{ height: "911px" }}>
         <div className="position-relative" style={{ height: "911px" }}>
           <div className="position-relative h-full" ref={flipbookContainer} 

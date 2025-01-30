@@ -14,8 +14,7 @@ const navButtons=[
 ]
 const Navbar = ({showNavbar}) => {
   const navbarRef = useRef(null);
-  const divRef = useRef(null);
-  const [selected,handleSelected]=useContext(NavContext)
+  const [handleSelected]=useContext(NavContext)
    
   useEffect(() => {
     const navbar = navbarRef.current;
@@ -29,30 +28,23 @@ const Navbar = ({showNavbar}) => {
             bottom:0
           });
     }
-    // ScrollTrigger.create({
-    //   trigger: document.body, // Entire body as the scroll trigger
-    //   start: 'top+=1 top', // When user scrolls even slightly
-    //   onEnter: () => {
-       
-    //   },
-      
-    // });
+   
   }, [showNavbar]);
   const handleClick=(val)=>{
-    handleSelected(val) // Set logo as selected on click
+    handleSelected(val)  
   }
 
   return (
     <div
       ref={navbarRef}
       style={{
-        position: 'fixed', // Fixed at the bottom
+        position: 'fixed',  
         bottom: -90,
         left: 0,
         width: '100%',
-        backgroundColor:  'white', // Navbar color
+        backgroundColor:  'white', 
         color: 'black',
-        opacity: 0, // Initially hidden
+        opacity: 0,  
         zIndex: 20,
         
       }}
