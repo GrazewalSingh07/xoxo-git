@@ -1,48 +1,56 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-
-export const Button = ({ button, index }) => {
+import { ReactSVG } from 'react-svg'
+import { NavContext } from '../context/navContext';
+export const Button = ({ button, index ,handleClick}) => {
   const divRef = useRef();
   const [isHovering, setIsHovering] = useState(false);
   const child=useRef()
+  const [selected] = useContext(NavContext)
   
   useEffect(() => {
     const element = divRef.current;
 
     let interval;
-    if (isHovering) {
+    if (isHovering && selected!=button.label) {
       // Start toggling the border color on hover
       interval = setInterval(() => {
-        const currentColor = element.style.borderColor;
-        element.style.borderColor = currentColor === '#ff3131' ? 'black' : '#ff3131';
-      }, 100); // Toggle every 500ms
+        // const currentColor = element.style.borderColor;
+        const currentColor = window.getComputedStyle(element).borderColor; 
+element.style.borderColor = currentColor === 'rgb(255, 49, 49)' ? 'black' : '#ff3131';
+
+      }, 100);  
+
+    } else if(selected==button.label){
+      clearInterval(interval);
+      element.style.borderColor = '#ff3131';
     } else {
       // Clear the interval when not hovering
       clearInterval(interval);
       element.style.borderColor = 'black'; // Set the border color to black immediately
     }
-    if (isHovering) {
-        // On hover, scale the child element
-        gsap.to(child.current, {
-          scale: 1.2,
-          ease: 'elastic.inOut',
-          duration: 0.5,
-        });
-      } else {
-        // On hover out, reset the scale
-        gsap.to(child.current, {
-          scale: 1,
-          ease: 'elastic.inOut',
-          duration: 0.5,
-        });
-      }
+    if (isHovering || selected === button.label) {
+      // On hover or if the button is selected, scale the child element
+      gsap.to(child.current, {
+        scale: selected === button.label ? 1.2 : 1.2,
+        ease: 'elastic.inOut',
+        duration: 0.5,
+      });
+    } else {
+      // On hover out, reset the scale unless selected
+      gsap.to(child.current, {
+        scale: 1,
+        ease: 'elastic.inOut',
+        duration: 0.5,
+      });
+    }
    
     // Cleanup interval when the component unmounts
     return () => clearInterval(interval);
 
    
-  }, [isHovering]);
-
+  }, [isHovering,selected]);
+ 
   return (
     <button
       onPointerEnter={() => setIsHovering(true)}
@@ -59,25 +67,25 @@ export const Button = ({ button, index }) => {
         height: '120px',
         textAlign: 'center',
       }}
-      onClick={() => alert(button.label)}
+      onClick={()=>handleClick(button.label)}
     >
       {button.label === 'Fingerprints' ? (
         <div ref={child} style={{ position: 'relative' }}>
           <img
-            src={'/fingerprint.svg'}
+            src={selected==button.label ?'/fingerprintGreen.svg':'/fingerprint.svg'}
             alt={button.label}
             style={{
               position: 'absolute',
               left: '50%',
               right:'50%',
               transform: 'translate(-50%, -50%)',
-              
               zIndex: 20,
+             
             }}
-            width={60}
+            width={selected==button.label ?80:60}
           />
           <img
-            src={'/lock.svg'}
+            src={selected==button.label ?'/lockRed.svg':'/lock.svg'}
             alt={button.label}
             style={{
               position: 'absolute',
@@ -86,13 +94,13 @@ export const Button = ({ button, index }) => {
             transform: 'translate(-50%, -50%)',
               zIndex: 20,
             }}
-            width={20}
+            width={selected==button.label ?40:20}
           />
         </div>
-      ) : (
+      ) : (  
         <img
         ref={!button.isLogo ? child:null} 
-          src={button.img}
+          src={selected==button.label ?button.selectedImage:button.img}
           alt={button.label}
           width={button.isLogo ? 200 : button.label === 'ProjectSO' ? 140 : 80}
         />

@@ -1,19 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from './Button';
+import { NavContext } from '../context/navContext';
 
 gsap.registerPlugin(ScrollTrigger);
 const navButtons=[
     {label:'Fingerprints',img:'/xoxoLogo.svg'},
-    {label:'Bee',img:'/bee.svg'},
+    {label:'Bee',img:'/bee.svg',selectedImage:'/beeRed.svg'},
     {label:'Logo',img:'/xoxoLogo.svg',isLogo:true},
-    {label:'ProjectSO',img:'/projectSO.svg'},
-    {label:'Contact',img:'/contactUs.svg'},
+    {label:'ProjectSO',img:'/projectSO.svg',selectedImage:'/project-50Red.svg'},
+    {label:'Contact',img:'/contactUs.svg',selectedImage:'/emailRed.svg'},
 ]
 const Navbar = ({showNavbar}) => {
   const navbarRef = useRef(null);
   const divRef = useRef(null);
+  const [selected,handleSelected]=useContext(NavContext)
+   
   useEffect(() => {
     const navbar = navbarRef.current;
 
@@ -35,20 +38,20 @@ const Navbar = ({showNavbar}) => {
       
     // });
   }, [showNavbar]);
-  
+  const handleClick=(val)=>{
+    handleSelected(val) // Set logo as selected on click
+  }
 
   return (
     <div
       ref={navbarRef}
       style={{
-
         position: 'fixed', // Fixed at the bottom
         bottom: -90,
         left: 0,
         width: '100%',
-        backgroundColor: 'white', // Navbar color
+        backgroundColor:  'white', // Navbar color
         color: 'black',
-        
         opacity: 0, // Initially hidden
         zIndex: 20,
         
@@ -67,7 +70,7 @@ const Navbar = ({showNavbar}) => {
            
           }}>
             {navButtons.map((button, index) => (
-              <Button key={index}  button={button}  />
+              <Button handleClick={handleClick} key={index}  button={button}  />
             ))}
           </div>
        

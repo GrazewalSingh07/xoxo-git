@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './Navbar';
+import DownwardArrow from './DownwardsArrow';
+import {  BeeSection } from './Bee';
+import { NavContext } from '../context/navContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,21 +14,16 @@ const Header = () => {
   const logoCircleRef=useRef()
   const [hasScrolled, setHasScrolled] = useState(false);
   const [logoGone, setLogoGone] = useState(false);
+  const ArrowTextRef=useRef()
+  const [selected]=useContext(NavContext)
+  const dragonRef=useRef()
+   
   useEffect(() => {
     const header = headerRef.current;
     const logo = logoRef.current;
     const logoCircle = logoCircleRef.current;
-
-    // gsap.to(header,{
-    //     backgroundColor: '#000000', // Final color
-    //     duration: 1, // Duration of the animation
-    //     ease: 'linear', 
-       
-       
-        
-    // })
-    
-     
+    const ArrowText=ArrowTextRef.current
+   
    
       const handleScroll = () => {
         if (!hasScrolled) {
@@ -34,6 +32,7 @@ const Header = () => {
             backgroundColor: '#000000', // Change to black
             duration: 1, // Duration of the color transition
             ease: 'linear', // Smooth transition
+             //
           });
           gsap.to(logo,{
             opacity: 0, // Fade out the logo
@@ -45,13 +44,18 @@ const Header = () => {
               setLogoGone(true); // Trigger navbar visibility once the logo is gone
             }
         })
+        gsap.to(ArrowText, {
+            opacity: 0, // Fade out the text
+            duration: 1, // Duration of the animation
+            ease: 'linear',
+        })
         gsap.to(logoCircle, {
             rotation: 360, // Full rotation
             duration: 2, // Duration of one full rotation
             ease: 'none', // Linear rotation without easing
             repeat: -1, // Infinite rotation
             transformOrigin: '50% 40%', // Rotate around the exact center
-            
+           
           });
         }
       };
@@ -61,30 +65,29 @@ const Header = () => {
   
       // Cleanup event listener
       return () => {
+        
         window.removeEventListener('wheel', handleScroll);
       };
     // Create a timeline to sequence the animations
-    // const tl = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: document.body, // Use the body as the trigger
-    //     start: 'top top', // Start animation when the top of the body hits the top of the viewport
-    //     end: 'center top', // End animation when the bottom of the body hits the top of the viewport
-    //     scrub: true, // Smoothly animate on scroll
-    //   },
-    // });
-
-    // First, animate the background color to black
-    // tl.to(header, {
-    //   backgroundColor: 'black', // Final color
-    // });
-
-    // Then, fade out the logo
-    // tl.to(logo, {
-    //   opacity: 0, // Fade out the logo
-    // });
-//    gsap.
-
+   
   }, [hasScrolled]);
+
+  useEffect(()=>{
+     const dragon=dragonRef.current
+     const logoCircle=logoCircleRef.current
+      gsap.to(dragon, {
+        opacity: 1, // Fade in the logo
+        duration: 1, // Duration of the animation
+        ease: 'power1.inOut',
+      });
+      gsap.to(logoCircle, {
+        opacity:1,
+        duration: 1, // Duration of one full rotation
+        ease: 'power1.inOut', // Linear rotation without easing
+        
+      });
+     
+  },[ ])
  
   
    
@@ -92,23 +95,11 @@ const Header = () => {
     <div>
       <div
         ref={headerRef}
-        style={{
-          position: 'fixed', // Fix the header in place
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100vh', // Full viewport height
-          backgroundColor: '#ff3131', // Initial color
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: 'white',
-          fontSize: '2rem',
-          zIndex: 10, // Ensure it stays above other content
-        }}
-      >
+        className={`${!logoGone && 'header'}`}
+             >
         <div style={{ position: 'relative' }} ref={logoRef}>
         <img
+        ref={dragonRef}
           style={{
             position: 'absolute',
             left:'50%',
@@ -117,6 +108,7 @@ const Header = () => {
             width: '700px',
             height: 'auto',
             zIndex: 20, // Ensure it stays below other content
+            opacity: .1
           }}
           src={'/9.svg'}
           alt="Logo"
@@ -130,19 +122,41 @@ const Header = () => {
             right:'50%',
             transform: 'translate(-50%, -60%)',
             width: '700px',
-           
             zIndex: 20, // Ensure it stays below other content
+            opacity: .1
           }}
           src={'/10.svg'}
           alt="Logo"
           
         />
         </div>
+        <div
+       ref={ArrowTextRef}
+        style={{
+        bottom: '-10px',
+        position:'absolute',
+      
+        margin: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        whiteSpace:"nowrap",
         
+       }} >
+       
+         {/* <DownwardArrow   /> */}
+         <img style={{width:'80px',position:'absolute',bottom:'60px'}}  src={'/arrowDown.gif'}/>
+         <p className='ScrollMessage' style={{  color:'black'}}>SCROLL PAGE DOWN</p>
+       </div>
+       {logoGone && selected=='Bee'&& <BeeSection/>}
       </div>
+    
       {/* Scrollable content inside the Header component */}
-      <div style={{ height: '300vh', paddingTop: '100vh' }}>
-      <Navbar showNavbar={logoGone} />
+      <div style={{ height: !logoGone&& '300vh', paddingTop: !logoGone&&'100vh' }}>
+        {/* <Bee/> */}
+        
+       <Navbar showNavbar={logoGone} />
       </div>
     </div>
   );

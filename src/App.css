@@ -9,10 +9,55 @@
 
  }
 
- #root{ overflow: hidden;}
-
+ body,html{
+    padding: 0;
+    margin: 0; 
+   box-sizing: border-box;
+    
+ } 
+ 
  .navButton{
   border:2px solid black; 
 
  }
+
+ canvas{
+    width: 100vw;
+    height: 100vh;
+ }
  
+ 
+.header{
+    
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #ff3131;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 2rem;
+        z-index: 10;
+       
+      
+}
+.beeLogo{
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    z-index: 100;
+    transform: translateX(-50%);
+    opacity: .1;
+     scale:1.5
+    
+  }
+  .beeLogo img{
+    width: 100px;
+    height: auto;
+  }
+  .parallexContainer{
+    opacity: .1;
+  }
