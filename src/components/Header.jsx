@@ -138,7 +138,7 @@ const Header = () => {
         <div
           ref={ArrowTextRef}
           style={{
-            bottom: "-10px",
+            bottom: "0",
             position: "absolute",
 
             margin: "auto",
