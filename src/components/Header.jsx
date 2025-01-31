@@ -28,12 +28,11 @@ const Header = () => {
    
       const handleScroll = () => {
         if (!hasScrolled) {
-          setHasScrolled(true); // Mark as scrolled
+          setHasScrolled(true);  
           gsap.to(header, {
-            backgroundColor: '#000000', // Change to black
-            duration: 1, // Duration of the color transition
-            ease: 'linear', // Smooth transition
-             //
+            backgroundColor: '#000000',  
+            duration: 1, 
+            ease: 'linear',  
           });
           gsap.to(logo,{
             opacity: 0,  
