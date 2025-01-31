@@ -3,10 +3,10 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "./Navbar";
 
-import { BeeSection } from "./Bee";
+import { Bee } from "./Bee";
 import { NavContext } from "../context/navContext";
 import useResponsive from "../hooks/useResponsive";
-import HoverParallax from "./BeeSection";
+import HoverParallax from "./HoverParallax";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -159,11 +159,11 @@ const Header = () => {
             SCROLL PAGE DOWN
           </p>
         </div>
-
+          
         {logoGone && (selected == "Bee" || selected == "Contact") && (
-          <BeeSection />
+         <Bee />
         )}
-        {logoGone && selected == "ProjectSO" && <HoverParallax />}
+        {/* {logoGone && selected == "ProjectSO" && } */}
       </div>
       <Navbar showNavbar={logoGone} />
     </div>

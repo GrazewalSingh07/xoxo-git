@@ -18,7 +18,7 @@ const navButtons = [
 ];
 const Navbar = ({ showNavbar }) => {
   const navbarRef = useRef(null);
-  const [selected, handleSelected] = useContext(NavContext);
+  const [_selected, handleSelected,_navBarActive,setNavBarActive] = useContext(NavContext);
 
   useEffect(() => {
     const navbar = navbarRef.current;
@@ -26,9 +26,12 @@ const Navbar = ({ showNavbar }) => {
     if (showNavbar) {
       gsap.to(navbar, {
         opacity: 1,
-        duration: 0.5,
+        duration: 1,
         ease: "power1.inOut",
         bottom: 0,
+        onComplete: function(){
+          setNavBarActive(true);
+        }
       });
     }
   }, [showNavbar]);

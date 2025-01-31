@@ -16,6 +16,7 @@ html {
   padding: 0;
   overscroll-behavior: none;
   scrollbar-width: none;
+  background-color: black;
   
 }
 
@@ -37,6 +38,9 @@ html {
   font-size: 2rem;
   z-index: 10;
 }
+.headerBee{
+  background: #000;
+}
 
 .beeLogo {
   position: fixed;
@@ -55,11 +59,12 @@ html {
 .container {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 95vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  
   
 }
 
@@ -69,6 +74,7 @@ html {
   height: auto;
   z-index: 2;
   overflow: hidden;
+  opacity: 0;
 }
 
  
@@ -81,4 +87,44 @@ html {
   border-radius: 50%;
   z-index: 3;
   cursor: pointer;
+}
+.beeParallexTextContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  z-index: 999;
+  position: absolute;
+  bottom: 100px;
+  padding: 10px;
+  opacity: 0;
+   
+}
+.comingSoon{
+  font-family: 'Arial Unicode MS' ;
+  letter-spacing: 6px;
+  font-size: 18px;
+  font-weight: 100;
+  color: white;
+  text-align: center;
+ margin-bottom: -5px;
+}
+.fightHuman{
+  font-family: 'Saira Condensed', Arial, sans-serif;
+  letter-spacing: -1;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+}
+.platforms{
+  display: flex;
+  
+}
+.platform{
+   margin-left: -10px;
+   margin-right: -10px;
+}
+.introContainer{
+ display: flex;
+ flex-direction: column;
 }
