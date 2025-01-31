@@ -8,12 +8,10 @@ import FlipbookAnimation from './Effect2';
 
 export const BeeSection = () => {
     const logoImageRef=useRef()
-     
-
+    
     const [showParallex, setShowParallex] = useState(false)
   useEffect(()=>{
-   const logoImage=logoImageRef.current
-  
+   const logoImage=logoImageRef.current 
    if(logoImage) {
        gsap.to(logoImage,{
            
@@ -27,7 +25,6 @@ export const BeeSection = () => {
             }
        })
    }
-   
   },[])
   
     return (
@@ -35,7 +32,7 @@ export const BeeSection = () => {
           <div className="beeLogo" ref={logoImageRef}>
             <img src={'/beeLogo.svg'}/>
         </div>
-      
+       
          <FlipbookAnimation  />
         
          
