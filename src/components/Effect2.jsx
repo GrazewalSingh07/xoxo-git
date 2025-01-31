@@ -1,64 +1,56 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import {throttle} from "lodash";  
+import { throttle } from "lodash";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function FlipbookAnimation() {
   const [imageIndex, setImageIndex] = useState(0);
 
-  const imageNumbers = Array.from({ length: 167 }, (_, i) => 114 + i);
+  const imageNumbers = Array.from({ length: 171 }, (_, i) => 114 + i);
   const images = imageNumbers.map(num => `/bee/Danny.0${num}.jpg`);
 
   const scrollContainer = useRef();
-
-  const updateImageIndex = useCallback(
-    throttle((index) => {
-      setImageIndex(index);
-    }, 100), 
-    []
-  );
-
+  // const updateImageIndex = useCallback(
+  //   throttle((index) => {
+  //     setImageIndex(index);
+  //   }, 100), 
+  //   []
+  // );
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0);  // To reset scroll position on load
     const totalFrames = images.length - 1;
-    let lastIndex = 0;
 
     const timeline = gsap.timeline({
       paused: true,
       onUpdate: () => {
-        const currentTime = timeline.time() / 400;
+        const currentTime = timeline.time() / timeline.duration();
         let index = Math.floor(currentTime * totalFrames);
-
-         
-          updateImageIndex(index);
+        setImageIndex(index);
         
       }
     });
 
+    // ScrollTrigger links scroll position to animation
     ScrollTrigger.create({
       trigger: scrollContainer.current,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1,
-      
-      animation: timeline,
+      start: "top top",  // Trigger when the scroll container hits the top of the viewport
+      end: "bottom bottom",  // Trigger when the scroll container hits the bottom of the viewport
+      scrub: 1,  // Ensures the animation is in sync with the scroll
+      animation: timeline,  // Link animation to ScrollTrigger
     });
 
     timeline.to({}, { duration: totalFrames, ease: "none" });
-    // timeline.eventCallback("onComplete", () => {
-      
-    //   setImageIndex(114);  
-    // });
+
     return () => {
-      timeline.kill();
+      timeline.kill();  // Cleanup timeline on component unmount
     };
-  }, [images.length, updateImageIndex]);
+  }, [images.length]);
 
   return (
-    <div  ref={scrollContainer} style={{ position: "relative", height: "1200px" ,overflowY:'auto'  }}>
-      <div style={{ height: "100%"  }}>
+    <div ref={scrollContainer} style={{ position: "relative", height: "1200px", overflowY: 'auto' }}>
+      <div style={{ height: "100%" }}>
         <div 
           style={{
             position: "fixed",
@@ -68,8 +60,7 @@ export default function FlipbookAnimation() {
             width: "100vw",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
-             
+            alignItems: "center", 
           }}
         >
           <img
