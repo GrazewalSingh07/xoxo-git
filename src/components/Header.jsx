@@ -5,6 +5,7 @@ import Navbar from './Navbar';
  
 import {  BeeSection } from './Bee';
 import { NavContext } from '../context/navContext';
+import useResponsive from '../hooks/useResponsive';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,7 +18,7 @@ const Header = () => {
   const ArrowTextRef=useRef()
   const [selected]=useContext(NavContext)
   const dragonRef=useRef()
-   
+  const screenSize = useResponsive();
   useEffect(() => {
     const header = headerRef.current;
     const logo = logoRef.current;
@@ -35,40 +36,37 @@ const Header = () => {
              //
           });
           gsap.to(logo,{
-            opacity: 0, // Fade out the logo
-            duration: 1, // Duration of the animation
+            opacity: 0,  
+            duration: 1, 
             ease: 'linear',
            
             scale: .7,
             onComplete: () => {
-              setLogoGone(true); // Trigger navbar visibility once the logo is gone
+              setLogoGone(true);  
             }
         })
         gsap.to(ArrowText, {
-            opacity: 0, // Fade out the text
-            duration: 1, // Duration of the animation
+            opacity: 0, 
+            duration: 1,  
             ease: 'linear',
         })
         gsap.to(logoCircle, {
-            rotation: 360, // Full rotation
-            duration: 2, // Duration of one full rotation
-            ease: 'none', // Linear rotation without easing
-            repeat: -1, // Infinite rotation
-            transformOrigin: '50% 40%', // Rotate around the exact center
+            rotation: 360,  
+            duration: 2, 
+            ease: 'none',  
+            repeat: -1, 
+            transformOrigin: '50% 40%', 
            
           });
         }
       };
-  
-      // Add a "wheel" event listener for explicit user scroll
+   
       window.addEventListener('wheel', handleScroll, { passive: true });
-  
-      // Cleanup event listener
+   
       return () => {
         
         window.removeEventListener('wheel', handleScroll);
-      };
-    // Create a timeline to sequence the animations
+      }; 
    
   }, [hasScrolled]);
 
@@ -76,14 +74,14 @@ const Header = () => {
      const dragon=dragonRef.current
      const logoCircle=logoCircleRef.current
       gsap.to(dragon, {
-        opacity: 1, // Fade in the logo
-        duration: 1, // Duration of the animation
+        opacity: 1,  
+        duration: 1, 
         ease: 'power1.inOut',
       });
       gsap.to(logoCircle, {
         opacity:1,
-        duration: 1, // Duration of one full rotation
-        ease: 'power1.inOut', // Linear rotation without easing
+        duration: 1, 
+        ease: 'power1.inOut',  
         
       });
      
@@ -92,31 +90,26 @@ const Header = () => {
   
    
   return (
-    <div style={{
-      position: 'sticky',
-      top: 0,
-   
-    }}>
+    <div >
       <div
         ref={headerRef}
-        className={`${!logoGone && 'header'}`}
+        className={` ${!logoGone && 'header'}`}
              >
         <div style={{ position: 'relative' }} ref={logoRef}>
         <img
-        ref={dragonRef}
+          ref={dragonRef}
           style={{
             position: 'absolute',
+            top: `${screenSize=='sm'&&0}`,
             left:'50%',
             right:'50%',
-            transform: 'translate(-50%, -60%)',
-            width: '700px',
-            height: 'auto',
+            transform: 'translate(-50%, -60%)',  
             zIndex: 20, // Ensure it stays below other content
             opacity: .1
           }}
           src={'/9.svg'}
           alt="Logo"
-          
+          width={screenSize=='lg'?700:screenSize=='md'?500:screenSize=='sm'?400:700}
         />
         <img
           ref={logoCircleRef}
@@ -125,13 +118,13 @@ const Header = () => {
             left:'50%',
             right:'50%',
             transform: 'translate(-50%, -60%)',
-            width: '700px',
+            
             zIndex: 20, // Ensure it stays below other content
             opacity: .1
           }}
           src={'/10.svg'}
           alt="Logo"
-          
+          width={screenSize=='lg'?700:screenSize=='md'?500:screenSize=='sm'?400:700}
         />
         </div>
         <div
@@ -147,21 +140,13 @@ const Header = () => {
         alignItems: 'center',
         whiteSpace:"nowrap",
         
-       }} >
-       
-         {/* <DownwardArrow   /> */}
-         <img style={{width:'80px',position:'absolute',bottom:'60px'}}  src={'/arrowDown.gif'}/>
+       }} >  <img style={{width:'80px',position:'absolute',bottom:'60px'}}  src={'/arrowDown.gif'}/>
          <p className='ScrollMessage' style={{  color:'black'}}>SCROLL PAGE DOWN</p>
        </div>
-       {logoGone && selected=='Bee'&& <BeeSection/>}
-      </div>
-    
-      {/* Scrollable content inside the Header component */}
-      <div style={{ height: !logoGone&& '300vh', paddingTop: !logoGone&&'100vh' }}>
-        {/* <Bee/> */}
-        
+       {logoGone && (selected=='Bee' || selected=='Contact')&& <BeeSection/>}
+      </div> 
        <Navbar showNavbar={logoGone} />
-      </div>
+     
     </div>
   );
 };

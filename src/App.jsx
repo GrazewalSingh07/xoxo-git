@@ -1,9 +1,6 @@
 import React from 'react';
-import  { Hero } from './components/Header';
-import Navbar from './components/Navbar';
-import  './App.css'  
-import Scene from './components/Scene'; 
-import FlipbookAnimation from './components/Effect2';
+import  { Hero } from './components/Header'; 
+import  './App.css'   
 const App = () => {
   return (
     <div>

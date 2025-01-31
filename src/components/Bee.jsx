@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
- 
-import ParallexEffect from './ParallexEffect';
+  
 import FlipbookAnimation from './Effect2';
 
  
@@ -9,7 +8,7 @@ import FlipbookAnimation from './Effect2';
 
 export const BeeSection = () => {
     const logoImageRef=useRef()
-    const ParallexRef=useRef()
+     
 
     const [showParallex, setShowParallex] = useState(false)
   useEffect(()=>{
@@ -36,9 +35,7 @@ export const BeeSection = () => {
           <div className="beeLogo" ref={logoImageRef}>
             <img src={'/beeLogo.svg'}/>
         </div>
-     
-         
-         {/* <ParallexEffect show={showParallex}/> */}
+      
          <FlipbookAnimation  />
         
          

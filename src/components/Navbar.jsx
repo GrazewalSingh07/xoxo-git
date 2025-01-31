@@ -31,7 +31,20 @@ const Navbar = ({showNavbar}) => {
    
   }, [showNavbar]);
   const handleClick=(val)=>{
+
     handleSelected(val)  
+
+    if(val=='Contact'){
+      const handleEmailClick = () => {
+        const email = "grazewals@gmail.com";
+        const subject = encodeURIComponent("Your Subject Here");
+        const body = encodeURIComponent("Hello,\n\nI wanted to reach out regarding...");
+        
+        // Open Gmail with the pre-filled email
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`, "_blank");
+      };
+      handleEmailClick()
+    }
   }
 
   return (
