@@ -10,23 +10,21 @@
   display: none;
 }
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
-  overscroll-behavior: none; 
+  overscroll-behavior: none;
   scrollbar-width: none;
+  
 }
- 
- .navButton{
-  border:2px solid black; 
 
- }
- 
- 
- 
-.header{
-    
-  position: fixed !important;
+.navButton {
+  border: 2px solid black;
+}
+
+.header {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -38,27 +36,49 @@ body, html {
   color: white;
   font-size: 2rem;
   z-index: 10;
-       
-      
+}
+
+.beeLogo {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  z-index: 100;
+  transform: translateX(-50%);
+  opacity: 0.1;
+  scale: 1.5;
+}
+.beeLogo img {
+  width: 100px;
+  height: auto;
 }
  
-.beeLogo{
-    position: fixed;
-    top: 50px;
-    left: 50%;
-    z-index: 100;
-    transform: translateX(-50%);
-    opacity: .1;
-    scale:1.5
-    
-  }
-  .beeLogo img{
-    width: 100px;
-    height: auto;
-  }
-  .parallexContainer{
-    opacity: .1;
-  }
-  .beeText{ 
-    
-  }
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+}
+
+.bg, .bird {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  z-index: 2;
+  overflow: hidden;
+}
+
+ 
+
+.hover-circle {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: transparent;
+  border-radius: 50%;
+  z-index: 3;
+  cursor: pointer;
+}

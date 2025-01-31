@@ -1,27 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 function useResponsive() {
-  const [screenSize, setScreenSize] = useState('');
+  const [screenSize, setScreenSize] = useState("");
 
   useEffect(() => {
     const updateScreenSize = () => {
       const width = window.innerWidth;
 
       if (width < 576) {
-        setScreenSize('sm');
+        setScreenSize("sm");
       } else if (width >= 576 && width < 992) {
-        setScreenSize('md');
+        setScreenSize("md");
       } else if (width >= 992) {
-        setScreenSize('lg');
+        setScreenSize("lg");
       }
     };
 
     updateScreenSize();
 
-    window.addEventListener('resize', updateScreenSize);
+    window.addEventListener("resize", updateScreenSize);
 
     return () => {
-      window.removeEventListener('resize', updateScreenSize);
+      window.removeEventListener("resize", updateScreenSize);
     };
   }, []);
 
