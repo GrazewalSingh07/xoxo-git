@@ -31,11 +31,9 @@ export default function FlipbookAnimation() {
         const currentTime = timeline.time() / 400;
         let index = Math.floor(currentTime * totalFrames);
 
-        
-        if ((index % 5 === 0 || index % 6 === 0) && index !== lastIndex) {
-          lastIndex = index;
+         
           updateImageIndex(index);
-        }
+        
       }
     });
 
@@ -49,10 +47,10 @@ export default function FlipbookAnimation() {
     });
 
     timeline.to({}, { duration: totalFrames, ease: "none" });
-    timeline.eventCallback("onComplete", () => {
+    // timeline.eventCallback("onComplete", () => {
       
-      setImageIndex(114);  
-    });
+    //   setImageIndex(114);  
+    // });
     return () => {
       timeline.kill();
     };
