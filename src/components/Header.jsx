@@ -139,7 +139,7 @@ const Header = () => {
         alignItems: 'center',
         whiteSpace:"nowrap",
         
-       }} >  <img style={{width:'80px',position:'absolute',bottom:'60px'}}  src={'/arrowDown.gif'}/>
+       }} >  <img style={{width:'80px',position:'absolute',bottom:'60px'}} alt='Scroll arrow' src={'/arrowDown.gif'}/>
          <p className='ScrollMessage' style={{  color:'black'}}>SCROLL PAGE DOWN</p>
        </div>
        {logoGone && (selected=='Bee' || selected=='Contact')&& <BeeSection/>}

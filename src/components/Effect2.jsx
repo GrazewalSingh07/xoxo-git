@@ -53,7 +53,7 @@ export default function FlipbookAnimation() {
     gsap.to(beeTextRef.current,{
       duration: 1,
       ease: 'power1.inOut',
-      y:-100,
+      y:-350,
       opacity:1,
       transformOrigin: 'center center',
        onComplete: function(){
@@ -63,6 +63,7 @@ export default function FlipbookAnimation() {
           y:-500,
           opacity:0,
           transformOrigin: 'center center',
+          delay:1,
        })
       }
   })
