@@ -132,15 +132,15 @@ export function Model(props) {
 
 export const ModelParallax = () => {
   return (
-    <>
+    <div style={{width:'100%',}}>
      
-      <Canvas style={{height:'100vh'}} camera={{ position: [0, 0, 5], fov: 50 }}>
+      <Canvas style={{height:'80vh',width:'80vw',margin:'auto',paddingTop:'8vh'}} camera={{ position: [0, 0, 5], fov: 50 }}>
         <ambientLight intensity={0.5} />
         <Environment preset="lobby" />
         <Model />
         <OrbitControls />
        
       </Canvas>
-    </>
+    </div>
   );
 };

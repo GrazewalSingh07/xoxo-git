@@ -36,7 +36,7 @@ const Navbar = ({ showNavbar }) => {
     }
   }, [showNavbar]);
   const handleClick = (val) => {
-    handleSelected(val);
+   
 
     if (val == "Contact") {
       const handleEmailClick = () => {
@@ -52,6 +52,8 @@ const Navbar = ({ showNavbar }) => {
         );
       };
       handleEmailClick();
+    }else if(val!='Logo'){
+      handleSelected(val);
     }
   };
 
@@ -82,7 +84,7 @@ const Navbar = ({ showNavbar }) => {
         }}
       >
         {navButtons.map((button, index) => (
-          <Button handleClick={handleClick} key={index} button={button} />
+          <Button handleClick={  handleClick} key={index} button={button} />
         ))}
       </div>
     </div>
