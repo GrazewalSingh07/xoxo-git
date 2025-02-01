@@ -59,11 +59,12 @@ const Header = () => {
         });
       }
     };
-
+    window.addEventListener("touchmove", handleScroll, { passive: true });
     window.addEventListener("wheel", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("touchmove", handleScroll);
     };
   }, [hasScrolled]);
 
@@ -139,7 +140,7 @@ const Header = () => {
         <div
           ref={ArrowTextRef}
           style={{
-            bottom: "0",
+            bottom: `${screenSize=='sm'?"70px":0}`,
             position: "absolute",
 
             margin: "auto",

@@ -4,12 +4,14 @@ import { gsap } from "gsap";
 import FlipbookAnimation from "./Effect2";
 import HoverParallax from "./HoverParallax";
 import { ModelParallax } from "./Model";
+import useResponsive from "../hooks/useResponsive";
  
 
 export const Bee = () => {
   const logoImageRef = useRef();
 
   const [showParallex, setShowParallex] = useState(false);
+  const screenSize = useResponsive();
   useEffect(() => {
     const logoImage = logoImageRef.current;
     if (logoImage) {
@@ -27,8 +29,8 @@ export const Bee = () => {
 
   return (
     <div style={{ position: "relative" }}>
-      <div className="beeLogo" ref={logoImageRef}>
-        <img src={"/beeLogo.svg"} />
+      <div  className="beeLogo" ref={logoImageRef}>
+        <img   src={"/beeLogo.svg"} />
       </div>
        {showParallex &&  <HoverParallax/> }
        {/* */}

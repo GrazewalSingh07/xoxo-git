@@ -1,12 +1,14 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { NavContext } from "../context/navContext";
+import useResponsive from "../hooks/useResponsive";
 
 export default function HoverParallax() {
   const bgRef = useRef(null);
   const birdRef = useRef(null);
   const containerRef = useRef(null);
   const textRef=useRef()
+  const screenSize = useResponsive();
   const [_selected, _handleSelected,navBarActive,_setNavBarActive] = useContext(NavContext);
     const [canInteract,setCanInteract]=useState(false)
   const handleMouseMove = (e) => {
@@ -58,18 +60,18 @@ export default function HoverParallax() {
  
       <img ref={birdRef} src="/beeWood.png" alt="Bird" className="bird" />
  
-      <div ref={textRef} className="beeParallexTextContainer">
+      {/* <div ref={textRef} className="beeParallexTextContainer">
         
-        <img width={500} src={'platforms/7.svg'}/>
+        <img width={screenSize=='sm'||screenSize=='md'?100:500} src={'platforms/7.svg'}/>
         <div className="introContainer">
-          <p className="comingSoon">COMING SOON</p>
+          <p  className="comingSoon">COMING SOON</p>
           <div className="platforms">
-            <img width={100}  className="platform" src={'/platforms/4.svg'}/>
-            <img  width={130} className="platform"src={'/platforms/5.svg'}/>
-            <img  width={100} className="platform" src={'/platforms/6.svg'}/>
+            <img width={screenSize=='sm'||screenSize=='md'?80:100}  className="platform" src={'/platforms/4.svg'}/>
+            <img  width={screenSize=='sm'||screenSize=='md'?80:100} className="platform"src={'/platforms/5.svg'}/>
+            <img  width={screenSize=='sm'||screenSize=='md'?80:100} className="platform" src={'/platforms/6.svg'}/>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="hover-circle"></div>
     </div>
   );

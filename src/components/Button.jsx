@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { ReactSVG } from "react-svg";
+ 
 import { NavContext } from "../context/navContext";
 export const Button = ({ button, index, handleClick }) => {
   const divRef = useRef();
