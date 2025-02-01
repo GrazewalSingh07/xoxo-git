@@ -3,6 +3,8 @@ import { gsap } from "gsap";
 
 import FlipbookAnimation from "./Effect2";
 import HoverParallax from "./HoverParallax";
+import { ModelParallax } from "./Model";
+ 
 
 export const Bee = () => {
   const logoImageRef = useRef();
@@ -28,7 +30,8 @@ export const Bee = () => {
       <div className="beeLogo" ref={logoImageRef}>
         <img src={"/beeLogo.svg"} />
       </div>
-       {showParallex && <HoverParallax/>}
+       {showParallex &&  <HoverParallax/> }
+       {/* */}
       {/* <FlipbookAnimation /> */}
     </div>
   );

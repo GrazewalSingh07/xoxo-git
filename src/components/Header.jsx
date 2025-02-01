@@ -7,6 +7,7 @@ import { Bee } from "./Bee";
 import { NavContext } from "../context/navContext";
 import useResponsive from "../hooks/useResponsive";
 import HoverParallax from "./HoverParallax";
+import { ModelParallax } from "./Model";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -163,7 +164,7 @@ const Header = () => {
         {logoGone && (selected == "Bee" || selected == "Contact") && (
          <Bee />
         )}
-        {/* {logoGone && selected == "ProjectSO" && } */}
+        {logoGone && selected == "ProjectSO" && <ModelParallax/> }
       </div>
       <Navbar showNavbar={logoGone} />
     </div>
